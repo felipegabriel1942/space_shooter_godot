@@ -1,0 +1,120 @@
+[gd_scene load_steps=6 format=3 uid="uid://cdg1dmcksq5qd"]
+
+[ext_resource type="Script" path="res://scripts/game_over_screen.gd" id="1_j1mwi"]
+[ext_resource type="FontFile" uid="uid://bykfdaftx5y8g" path="res://assets/fonts/PressStart2P-Regular.ttf" id="1_ncsni"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4rti7"]
+bg_color = Color(0.1125, 0.367751, 0.440243, 1)
+corner_radius_top_left = 25
+corner_radius_top_right = 25
+corner_radius_bottom_right = 25
+corner_radius_bottom_left = 25
+
+[sub_resource type="LabelSettings" id="LabelSettings_4napm"]
+font = ExtResource("1_ncsni")
+font_size = 38
+
+[sub_resource type="LabelSettings" id="LabelSettings_rtia3"]
+font = ExtResource("1_ncsni")
+font_size = 20
+
+[node name="GameOverScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_j1mwi")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 0.552941)
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -211.0
+offset_top = -160.0
+offset_right = 211.0
+offset_bottom = 198.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_4rti7")
+
+[node name="GameOverLabel" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -171.0
+offset_top = 59.0
+offset_right = 171.0
+offset_bottom = 97.0
+grow_horizontal = 2
+text = "GAME OVER"
+label_settings = SubResource("LabelSettings_4napm")
+
+[node name="HighScore" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -139.0
+offset_top = -39.0
+offset_right = 141.0
+offset_bottom = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "HI-SCORE: 9999"
+label_settings = SubResource("LabelSettings_rtia3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Score" type="Label" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -139.0
+offset_top = -2.0
+offset_right = 141.0
+offset_bottom = 29.0
+grow_horizontal = 2
+grow_vertical = 2
+text = "SCORE: 9999"
+label_settings = SubResource("LabelSettings_rtia3")
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="RestartButton" type="Button" parent="Panel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -148.0
+offset_top = 70.0
+offset_right = 174.0
+offset_bottom = 127.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_fonts/font = ExtResource("1_ncsni")
+theme_override_font_sizes/font_size = 35
+text = "RETRY"
+
+[connection signal="pressed" from="Panel/RestartButton" to="." method="_on_restart_button_pressed"]
