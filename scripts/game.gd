@@ -34,8 +34,9 @@ func _ready():
 	
 	hud.score = 0
 	player.global_position = player_spawn_pos.global_position
-	player.laser_shoot.connect(_on_player_laser_shot)
+	player.laser_shoot.connect(_on_laser_shot)
 	player.killed.connect(_on_player_killed)
+	player.hit.connect(_on_player_hit)
 
 func save_game():
 	var save_file = FileAccess.open("user://save.data", FileAccess.WRITE)
@@ -57,7 +58,7 @@ func _process(delta):
 	if parallax_background.scroll_offset.y >= 960:
 		parallax_background.scroll_offset.y = 0
 
-func _on_player_laser_shot(laser_scene, location):
+func _on_laser_shot(laser_scene, location):
 	var laser = laser_scene.instantiate()
 	laser.global_position = location
 	laser_container.add_child(laser)
@@ -67,6 +68,7 @@ func _on_enemy_spawn_timer_timeout():
 	var enemy = enemy_scenes.pick_random().instantiate()
 	enemy.global_position = Vector2(randf_range(50, 500), 50)
 	enemy.killed.connect(_on_enemy_killed)
+	enemy.laser_shoot.connect(_on_laser_shot)
 	enemy_container.add_child(enemy)
 	enemy.hit.connect(_on_enemy_hit)
 	
@@ -78,6 +80,9 @@ func _on_enemy_killed(points):
 		high_score = score
 
 func _on_enemy_hit():
+	hit_sound.play()
+	
+func _on_player_hit():
 	hit_sound.play()
 
 func _on_player_killed():

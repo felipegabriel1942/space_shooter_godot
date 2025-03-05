@@ -23,6 +23,8 @@ polygon = PackedVector2Array(-24, -10, -14, -18, -13, -23, 0, -29, 13, -23, 15, 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(0, -57)
 
+[node name="Muzzle" type="Marker2D" parent="."]
+
 [node name="LaserTimer" type="Timer" parent="."]
 autostart = true
 

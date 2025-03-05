@@ -1,5 +1,6 @@
 class_name Enemy extends Area2D
 
+signal laser_shoot(laser_scene, location)
 signal killed(points)
 signal hit()
 
@@ -8,6 +9,9 @@ signal hit()
 @export var points = 100
 @export var death_particle: PackedScene
 
+@onready var muzzle = $Muzzle
+
+var laser_scene = preload("res://scenes/lasers/enemy_laser.tscn")
 
 func _physics_process(delta):
 	global_position.y += speed * delta
@@ -40,4 +44,4 @@ func take_damage(amount):
 		hit.emit()
 
 func _on_laser_timer_timeout():
-	print("Shoot")
+	laser_shoot.emit(laser_scene, muzzle.global_position)
