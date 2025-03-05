@@ -1,11 +1,21 @@
-[gd_scene load_steps=4 format=3 uid="uid://ld5ol80kdk0r"]
+[gd_scene load_steps=7 format=3 uid="uid://ld5ol80kdk0r"]
 
 [ext_resource type="FontFile" uid="uid://bykfdaftx5y8g" path="res://assets/fonts/PressStart2P-Regular.ttf" id="1_gd5iv"]
 [ext_resource type="Script" path="res://scripts/hud.gd" id="1_s2voe"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_8rqva"]
 font = ExtResource("1_gd5iv")
-font_size = 36
+font_size = 18
+
+[sub_resource type="LabelSettings" id="LabelSettings_3ckgp"]
+font = ExtResource("1_gd5iv")
+font_size = 12
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_7qoel"]
+bg_color = Color(0.72, 0.0144, 0.0144, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_ojlca"]
+bg_color = Color(0.10115, 0.7, 0.091, 1)
 
 [node name="HUD" type="Control"]
 layout_mode = 3
@@ -20,10 +30,49 @@ script = ExtResource("1_s2voe")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_bottom = 73.0
+offset_top = 40.0
+offset_right = -420.0
+offset_bottom = 89.0
 grow_horizontal = 2
-text = "SCORE: 99999
+text = "99999
 "
 label_settings = SubResource("LabelSettings_8rqva")
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[node name="HealthBarLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -71.0
+offset_right = 100.0
+offset_bottom = -48.0
+grow_vertical = 0
+text = "HEALTH"
+label_settings = SubResource("LabelSettings_3ckgp")
+vertical_alignment = 1
+
+[node name="ScoreLabel" type="Label" parent="."]
+layout_mode = 1
+offset_left = 17.0
+offset_top = 23.0
+offset_right = 101.0
+offset_bottom = 46.0
+text = "SCORE"
+label_settings = SubResource("LabelSettings_3ckgp")
+vertical_alignment = 1
+
+[node name="HealthBar" type="ProgressBar" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 16.0
+offset_top = -48.0
+offset_right = 230.0
+offset_bottom = -21.0
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_7qoel")
+theme_override_styles/fill = SubResource("StyleBoxFlat_ojlca")

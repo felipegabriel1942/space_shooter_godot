@@ -33,6 +33,8 @@ func _ready():
 		save_game()
 	
 	hud.score = 0
+	hud.max_health = player.max_health
+	hud.health = player.health
 	player.global_position = player_spawn_pos.global_position
 	player.laser_shoot.connect(_on_laser_shot)
 	player.killed.connect(_on_player_killed)
@@ -84,11 +86,13 @@ func _on_enemy_hit():
 	
 func _on_player_hit():
 	hit_sound.play()
+	hud.health = player.health
 
 func _on_player_killed():
 	explode_sound.play()
 	game_over_screen.set_score(score)
 	game_over_screen.set_high_score(high_score)
+	hud.health = player.health
 	await get_tree().create_timer(1.5).timeout
 	game_over_screen.visible = true
 	save_game()

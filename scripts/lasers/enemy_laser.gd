@@ -2,6 +2,7 @@ extends Area2D
 
 @export var speed = 600
 @export var damage = 1
+@export var death_particle: PackedScene
 
 func _physics_process(delta):
 	global_position.y += speed * delta

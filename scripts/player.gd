@@ -11,8 +11,9 @@ signal hit()
 
 @onready var muzzle = $Muzzle
 
-var laser_scene = preload("res://scenes/laser.tscn")
+var laser_scene = preload("res://scenes/lasers/laser.tscn")
 var shoot_cd := false
+var max_health = health
 
 func _physics_process(_delta):
 	if Input.is_action_pressed("shoot"):
