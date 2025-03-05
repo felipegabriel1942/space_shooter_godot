@@ -6,11 +6,20 @@ signal hit()
 @export var speed = 150
 @export var health = 1
 @export var points = 100
+@export var death_particle: PackedScene
+
 
 func _physics_process(delta):
 	global_position.y += speed * delta
 
 func die():
+	if death_particle != null:
+		var particle = death_particle.instantiate()
+		particle.position = global_position
+		particle.rotation = global_rotation
+		particle.emitting = true
+		get_tree().current_scene.add_child(particle)
+	
 	queue_free()
 
 func _on_body_entered(body):
@@ -29,3 +38,6 @@ func take_damage(amount):
 		die()
 	else:
 		hit.emit()
+
+func _on_laser_timer_timeout():
+	print("Shoot")

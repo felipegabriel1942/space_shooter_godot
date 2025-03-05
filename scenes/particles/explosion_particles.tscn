@@ -1,0 +1,39 @@
+[gd_scene load_steps=7 format=3 uid="uid://cnhv2qwap7hrg"]
+
+[ext_resource type="Script" path="res://scripts/particles/explosion_particles.gd" id="1_xjt7b"]
+
+[sub_resource type="Gradient" id="Gradient_dbdlh"]
+offsets = PackedFloat32Array(0.540984, 1)
+colors = PackedColorArray(0.982343, 0.982342, 0.982342, 1, 1, 1, 1, 0)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_qvpsk"]
+gradient = SubResource("Gradient_dbdlh")
+
+[sub_resource type="Curve" id="Curve_gmhb7"]
+_data = [Vector2(0, 1), 0.0, 0.0, 0, 0, Vector2(0.986667, 0), 0.0, 0.0, 0, 0]
+point_count = 2
+
+[sub_resource type="CurveTexture" id="CurveTexture_m1k60"]
+curve = SubResource("Curve_gmhb7")
+
+[sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_62xcn"]
+lifetime_randomness = 0.5
+particle_flag_disable_z = true
+spread = 180.0
+initial_velocity_min = 500.0
+initial_velocity_max = 500.0
+gravity = Vector3(0, 0, 0)
+scale_min = 20.0
+scale_max = 20.0
+scale_curve = SubResource("CurveTexture_m1k60")
+color_ramp = SubResource("GradientTexture1D_qvpsk")
+
+[node name="ExplosionParticles" type="GPUParticles2D"]
+modulate = Color(1, 0.03, 0.03, 1)
+self_modulate = Color(1.34902, 0.768627, 0, 1)
+emitting = false
+amount = 50
+process_material = SubResource("ParticleProcessMaterial_62xcn")
+one_shot = true
+explosiveness = 1.0
+script = ExtResource("1_xjt7b")

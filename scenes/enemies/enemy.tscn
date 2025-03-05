@@ -1,14 +1,17 @@
-[gd_scene load_steps=3 format=3 uid="uid://csvy2mhbwav1x"]
+[gd_scene load_steps=4 format=3 uid="uid://csvy2mhbwav1x"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_vke48"]
 [ext_resource type="Texture2D" uid="uid://d3soaxfbxyfw0" path="res://assets/textures/enemyRed2.png" id="1_wludo"]
+[ext_resource type="PackedScene" uid="uid://cnhv2qwap7hrg" path="res://scenes/particles/explosion_particles.tscn" id="2_oyo85"]
 
 [node name="Enemy" type="Area2D"]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_vke48")
+speed = 75
 health = 3
 points = 150
+death_particle = ExtResource("2_oyo85")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.7, 0.7)
@@ -20,5 +23,9 @@ polygon = PackedVector2Array(-24, -10, -14, -18, -13, -23, 0, -29, 13, -23, 15, 
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(0, -57)
 
+[node name="LaserTimer" type="Timer" parent="."]
+autostart = true
+
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="timeout" from="LaserTimer" to="." method="_on_laser_timer_timeout"]
