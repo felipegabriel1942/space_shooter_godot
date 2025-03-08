@@ -13,6 +13,8 @@ extends Node2D
 @onready var laser_sound = $SFX/LaserSound
 @onready var hit_sound = $SFX/HitSound
 @onready var explode_sound = $SFX/ExplodeSound
+@onready var pick_up_power_up_sound = $SFX/PickUpPowerUpSound
+@onready var power_up_container = $PowerUpContainer
 
 # setter implementation
 var score := 0:
@@ -71,9 +73,10 @@ func _on_enemy_spawn_timer_timeout():
 	enemy.global_position = Vector2(randf_range(50, 500), 50)
 	enemy.killed.connect(_on_enemy_killed)
 	enemy.laser_shoot.connect(_on_laser_shot)
-	enemy_container.add_child(enemy)
 	enemy.hit.connect(_on_enemy_hit)
-	
+	enemy.dropped_power_up.connect(_on_power_up_dropped)
+	enemy_container.add_child(enemy)
+
 func _on_enemy_killed(points):
 	explode_sound.play()
 	score += points
@@ -96,3 +99,18 @@ func _on_player_killed():
 	await get_tree().create_timer(1.5).timeout
 	game_over_screen.visible = true
 	save_game()
+
+func _on_player_healed():
+	hud.health = player.health
+
+func _on_heart_picked():
+	pick_up_power_up_sound.play()
+
+func _on_power_up_dropped(power_up_scene, location):	
+	if !player.is_max_health():
+		var power_up = power_up_scene.instantiate()
+		power_up.global_position = location
+		power_up.picked.connect(_on_heart_picked)
+		power_up_container.add_child(power_up)
+	
+	

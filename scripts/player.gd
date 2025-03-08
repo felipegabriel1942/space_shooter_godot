@@ -3,6 +3,7 @@ class_name Player extends CharacterBody2D
 signal laser_shoot(laser_scene, location)
 signal killed
 signal hit()
+signal healed()
 
 @export var speed = 300
 @export var fire_rate = 0.25
@@ -45,6 +46,12 @@ func take_damage(amount):
 	else:
 		hit.emit()
 
+func heal(amount):
+	if (health + amount <= max_health): 
+		health += amount
+		healed.emit()
+	
+
 func die():
 	if death_particle != null:
 		var particle = death_particle.instantiate()
@@ -55,3 +62,6 @@ func die():
 		
 	killed.emit()
 	queue_free()
+
+func is_max_health():
+	return health == max_health

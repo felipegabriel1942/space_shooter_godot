@@ -1,4 +1,4 @@
-[gd_scene load_steps=14 format=3 uid="uid://bbtipirab218a"]
+[gd_scene load_steps=15 format=3 uid="uid://bbtipirab218a"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_dr3bq"]
 [ext_resource type="PackedScene" uid="uid://bdxug6usf55au" path="res://scenes/player.tscn" id="2_qv4nh"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://cdg1dmcksq5qd" path="res://scenes/game_over_screen.tscn" id="5_gvr5p"]
 [ext_resource type="Texture2D" uid="uid://daike8eugswn" path="res://assets/textures/purple.png" id="6_8knkg"]
 [ext_resource type="AudioStream" uid="uid://c1he06kgtvdyx" path="res://assets/audio/explode.wav" id="6_8qxp6"]
+[ext_resource type="AudioStream" uid="uid://dw5q552imobfr" path="res://assets/audio/power_up_pickup.mp3" id="7_33x5e"]
 [ext_resource type="Texture2D" uid="uid://dxynlfe0tbhah" path="res://assets/textures/star.png" id="7_db661"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g5t5n"]
@@ -50,6 +51,9 @@ stream = ExtResource("5_3c2jy")
 [node name="ExplodeSound" type="AudioStreamPlayer" parent="SFX"]
 stream = ExtResource("6_8qxp6")
 
+[node name="PickUpPowerUpSound" type="AudioStreamPlayer" parent="SFX"]
+stream = ExtResource("7_33x5e")
+
 [node name="UILayer" type="CanvasLayer" parent="."]
 
 [node name="HUD" parent="UILayer" instance=ExtResource("4_nu821")]
@@ -87,6 +91,8 @@ position = Vector2(271, 857)
 
 [node name="EnemyContainer" type="Node2D" parent="."]
 
+[node name="PowerUpContainer" type="Node2D" parent="."]
+
 [node name="EnemySpawnTimer" type="Timer" parent="."]
 wait_time = 2.0
 autostart = true
@@ -94,4 +100,5 @@ autostart = true
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_ijdjb")
 
+[connection signal="healed" from="Player" to="." method="_on_player_healed"]
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]
