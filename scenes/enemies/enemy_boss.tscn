@@ -1,0 +1,18 @@
+[gd_scene load_steps=4 format=3 uid="uid://lehivtwshipr"]
+
+[ext_resource type="Texture2D" uid="uid://ce1g2fkri4n10" path="res://assets/textures/enemyBlack4.png" id="1_t2ggt"]
+[ext_resource type="Script" path="res://scripts/enemies/enemy_boss.gd" id="1_u3ggk"]
+[ext_resource type="PackedScene" uid="uid://cnhv2qwap7hrg" path="res://scenes/particles/explosion_particles.tscn" id="2_seln7"]
+
+[node name="EnemyBoss" type="Area2D"]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("1_u3ggk")
+death_particle = ExtResource("2_seln7")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("1_t2ggt")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
+polygon = PackedVector2Array(-27, 104, -34, 92, -102, 50, -102, -74, -48, -105, -16, -105, -16, -83, 17, -83, 18, -104, 50, -104, 102, -73, 101, 50, 35, 91, 28, 105)

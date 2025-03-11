@@ -2,7 +2,7 @@ extends Control
 
 @onready var score = $Score:
 	set(value):
-		score.text = str(value)
+		score.text = str(value).lpad(7, "0")
 		
 @onready var max_health = $HealthBar:
 	set(value):

@@ -30,11 +30,12 @@ script = ExtResource("1_s2voe")
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
-offset_top = 40.0
-offset_right = -420.0
-offset_bottom = 89.0
+offset_left = 17.0
+offset_top = 41.0
+offset_right = -397.0
+offset_bottom = 90.0
 grow_horizontal = 2
-text = "99999
+text = "9999999
 "
 label_settings = SubResource("LabelSettings_8rqva")
 horizontal_alignment = 1
