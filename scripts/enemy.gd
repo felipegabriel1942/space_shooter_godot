@@ -12,6 +12,7 @@ signal dropped_power_up(power_up_scene, location)
 @export var chance_of_drop = 15
 
 @onready var muzzle = $Muzzle
+@onready var flash_component = $FlashComponent
 
 var laser_scene = preload("res://scenes/lasers/enemy_laser.tscn")
 var heart_scene = preload("res://scenes/power_ups/heart.tscn")
@@ -45,6 +46,7 @@ func take_damage(amount):
 		killed.emit(points)
 		die()
 	else:
+		flash_component.flash()
 		hit.emit()
 
 func _on_laser_timer_timeout():
