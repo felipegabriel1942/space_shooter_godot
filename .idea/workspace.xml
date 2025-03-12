@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="f8241ac7-b8f3-435e-9b88-02f6c01f3d02" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/scenes/enemies/enemy.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/scenes/enemies/enemy.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scenes/enemies/interceptor_enemy.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/scenes/enemies/interceptor_enemy.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scenes/lasers/enemy_laser.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/scenes/lasers/enemy_laser.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scenes/lasers/laser.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/scenes/lasers/laser.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scenes/player.tscn" beforeDir="false" afterPath="$PROJECT_DIR$/scenes/player.tscn" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/enemy.gd" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/enemy.gd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/laser.gd" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/laser.gd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/lasers/enemy_laser.gd" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/lasers/enemy_laser.gd" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/scripts/player.gd" beforeDir="false" afterPath="$PROJECT_DIR$/scripts/player.gd" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "customColor": "",
+  "associatedIndex": 7
+}]]></component>
+  <component name="ProjectId" id="2uB185dlPAxTR2Y8386FCT2Z0Pb" />
+  <component name="ProjectViewState">
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "RunOnceActivity.OpenProjectViewOnStart": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "main",
+    "show.migrate.to.gradle.popup": "false"
+  }
+}]]></component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="f8241ac7-b8f3-435e-9b88-02f6c01f3d02" name="Changes" comment="" />
+      <created>1741706992793</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1741706992793</updated>
+    </task>
+    <servers />
+  </component>
+</project>

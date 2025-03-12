@@ -1,15 +1,15 @@
-[gd_scene load_steps=5 format=3 uid="uid://csvy2mhbwav1x"]
+[gd_scene load_steps=6 format=3 uid="uid://csvy2mhbwav1x"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_vke48"]
 [ext_resource type="Texture2D" uid="uid://d3soaxfbxyfw0" path="res://assets/textures/enemyRed2.png" id="1_wludo"]
 [ext_resource type="PackedScene" uid="uid://cnhv2qwap7hrg" path="res://scenes/particles/explosion_particles.tscn" id="2_oyo85"]
 [ext_resource type="Script" path="res://components/flash_component.gd" id="4_gu73t"]
+[ext_resource type="Script" path="res://components/move_component.gd" id="5_vghxj"]
 
 [node name="Enemy" type="Area2D"]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_vke48")
-speed = 75
 health = 3
 points = 150
 death_particle = ExtResource("2_oyo85")
@@ -27,11 +27,17 @@ position = Vector2(0, -57)
 [node name="Muzzle" type="Marker2D" parent="."]
 
 [node name="LaserTimer" type="Timer" parent="."]
+wait_time = 1.5
 autostart = true
 
 [node name="FlashComponent" type="Node" parent="." node_paths=PackedStringArray("sprite")]
 script = ExtResource("4_gu73t")
 sprite = NodePath("../Sprite2D")
+
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("5_vghxj")
+actor = NodePath("..")
+velocity = Vector2(0, 75)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

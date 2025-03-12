@@ -5,20 +5,16 @@ signal killed(points)
 signal hit()
 signal dropped_power_up(power_up_scene, location)
 
-@export var speed = 150
 @export var health = 1
 @export var points = 100
 @export var death_particle: PackedScene
 @export var chance_of_drop = 15
 
 @onready var muzzle = $Muzzle
-@onready var flash_component = $FlashComponent
+@onready var flash_component = $FlashComponent as FlashComponent
 
 var laser_scene = preload("res://scenes/lasers/enemy_laser.tscn")
 var heart_scene = preload("res://scenes/power_ups/heart.tscn")
-
-func _physics_process(delta):
-	global_position.y += speed * delta
 
 func die():
 	if death_particle != null:

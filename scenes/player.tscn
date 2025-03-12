@@ -1,8 +1,11 @@
-[gd_scene load_steps=4 format=3 uid="uid://bdxug6usf55au"]
+[gd_scene load_steps=7 format=3 uid="uid://bdxug6usf55au"]
 
 [ext_resource type="Texture2D" uid="uid://ctll4amp3x81e" path="res://assets/textures/playerShip1_orange.png" id="1_d5kds"]
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_mpm70"]
 [ext_resource type="PackedScene" uid="uid://cnhv2qwap7hrg" path="res://scenes/particles/explosion_particles.tscn" id="2_unatj"]
+[ext_resource type="Script" path="res://components/move_component.gd" id="4_ofd4y"]
+[ext_resource type="Script" path="res://components/move_input_component.gd" id="5_8e76j"]
+[ext_resource type="Script" path="res://components/position_clamp_component.gd" id="6_nqk0k"]
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
 collision_mask = 2
@@ -19,3 +22,15 @@ polygon = PackedVector2Array(-25, 1, -9, -8, -6, -27, 6, -27, 9, -8, 25, 1, 29, 
 
 [node name="Muzzle" type="Marker2D" parent="."]
 position = Vector2(0, -47)
+
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("4_ofd4y")
+actor = NodePath("..")
+
+[node name="MoveInputComponent" type="Node" parent="." node_paths=PackedStringArray("move_component")]
+script = ExtResource("5_8e76j")
+move_component = NodePath("../MoveComponent")
+
+[node name="PositionClampComponent" type="Node2D" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("6_nqk0k")
+actor = NodePath("..")

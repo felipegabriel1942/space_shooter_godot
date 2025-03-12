@@ -5,7 +5,6 @@ signal killed
 signal hit()
 signal healed()
 
-@export var speed = 300
 @export var fire_rate = 0.25
 @export var health = 3
 @export var death_particle: PackedScene
@@ -23,17 +22,6 @@ func _physics_process(_delta):
 			shoot()
 			await get_tree().create_timer(fire_rate).timeout
 			shoot_cd = false
-	
-	var direction = Vector2(
-		Input.get_axis("move_left", "move_right"), 
-		Input.get_axis("move_up", "move_down")
-	)
-	
-	velocity = direction * speed
-	
-	move_and_slide()
-	
-	global_position = global_position.clamp(Vector2.ZERO, get_viewport_rect().size)
 
 func shoot():
 	laser_shoot.emit(laser_scene, muzzle.global_position)

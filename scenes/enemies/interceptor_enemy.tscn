@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://ysqb1cnnnnqd"]
+[gd_scene load_steps=6 format=3 uid="uid://ysqb1cnnnnqd"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_jtn1b"]
 [ext_resource type="Texture2D" uid="uid://bwm656t2p1m5f" path="res://assets/textures/enemyRed3.png" id="2_1yah5"]
 [ext_resource type="PackedScene" uid="uid://cnhv2qwap7hrg" path="res://scenes/particles/explosion_particles.tscn" id="2_oenhw"]
 [ext_resource type="Script" path="res://components/flash_component.gd" id="4_xnt3j"]
+[ext_resource type="Script" path="res://components/move_component.gd" id="5_bw8am"]
 
 [node name="InterceptorEnemy" type="Area2D"]
 collision_layer = 2
@@ -26,11 +27,17 @@ polygon = PackedVector2Array(-36, -3, -18, -25, -12, -25, -6, -29, 6, -29, 12, -
 position = Vector2(1, 43)
 
 [node name="LaserTimer" type="Timer" parent="."]
+wait_time = 2.0
 autostart = true
 
 [node name="FlashComponent" type="Node" parent="." node_paths=PackedStringArray("sprite")]
 script = ExtResource("4_xnt3j")
 sprite = NodePath("../Sprite2D")
+
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("5_bw8am")
+actor = NodePath("..")
+velocity = Vector2(0, 150)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=3 uid="uid://bax8cyluc8l73"]
+[gd_scene load_steps=5 format=3 uid="uid://bax8cyluc8l73"]
 
 [ext_resource type="Texture2D" uid="uid://d0rjnky58128i" path="res://assets/textures/laserGreen11.png" id="1_16qsp"]
 [ext_resource type="Script" path="res://scripts/lasers/enemy_laser.gd" id="1_r154n"]
+[ext_resource type="Script" path="res://components/move_component.gd" id="3_nnlu5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_hb7r7"]
 radius = 5.0
@@ -20,6 +21,11 @@ shape = SubResource("CapsuleShape2D_hb7r7")
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 position = Vector2(0, -38)
 scale = Vector2(1, 0.4)
+
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
+script = ExtResource("3_nnlu5")
+actor = NodePath("..")
+velocity = Vector2(0, 500)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
