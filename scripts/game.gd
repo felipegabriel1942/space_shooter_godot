@@ -2,7 +2,7 @@ extends Node2D
 
 @export var enemy_scenes: Array[PackedScene] = []
 
-@onready var player = $Player
+@onready var player = $Player as Player
 @onready var player_spawn_pos = $PlayerSpawnPos
 @onready var laser_container = $LaserContainer
 @onready var enemy_spawn_timer = $EnemySpawnTimer
@@ -35,8 +35,8 @@ func _ready():
 		save_game()
 	
 	hud.score = 0
-	hud.max_health = player.max_health
-	hud.health = player.health
+	hud.max_health = player.stats.max_health
+	hud.health = player.stats.health
 	player.global_position = player_spawn_pos.global_position
 	player.laser_shoot.connect(_on_laser_shot)
 	player.killed.connect(_on_player_killed)
@@ -89,19 +89,19 @@ func _on_enemy_hit():
 	
 func _on_player_hit():
 	hit_sound.play()
-	hud.health = player.health
+	hud.health = player.stats.health
 
 func _on_player_killed():
 	explode_sound.play()
 	game_over_screen.set_score(score)
 	game_over_screen.set_high_score(high_score)
-	hud.health = player.health
+	hud.health = player.stats.health
 	await get_tree().create_timer(1.5).timeout
 	game_over_screen.visible = true
 	save_game()
 
 func _on_player_healed():
-	hud.health = player.health
+	hud.health = player.stats.health
 
 func _on_heart_picked():
 	pick_up_power_up_sound.play()

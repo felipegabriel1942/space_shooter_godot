@@ -5,38 +5,36 @@ signal killed
 signal hit()
 signal healed()
 
-@export var fire_rate = 0.25
-@export var health = 3
+@export var stats: PlayerStatsResource
 @export var death_particle: PackedScene
 
 @onready var muzzle = $Muzzle
 
 var laser_scene = preload("res://scenes/lasers/laser.tscn")
 var shoot_cd := false
-var max_health = health
 
 func _physics_process(_delta):
 	if Input.is_action_pressed("shoot"):
 		if !shoot_cd:
 			shoot_cd = true
 			shoot()
-			await get_tree().create_timer(fire_rate).timeout
+			await get_tree().create_timer(stats.fire_rate).timeout
 			shoot_cd = false
 
 func shoot():
 	laser_shoot.emit(laser_scene, muzzle.global_position)
 	
 func take_damage(amount):
-	health -= amount
+	stats.health -= amount
 	
-	if health <= 0:
+	if stats.health <= 0:
 		die()
 	else:
 		hit.emit()
 
 func heal(amount):
-	if (health + amount <= max_health): 
-		health += amount
+	if (stats.health + amount <= stats.max_health): 
+		stats.health += amount
 		healed.emit()
 	
 
@@ -52,4 +50,4 @@ func die():
 	queue_free()
 
 func is_max_health():
-	return health == max_health
+	return stats.health == stats.max_health
