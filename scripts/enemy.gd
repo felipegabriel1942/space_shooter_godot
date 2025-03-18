@@ -27,11 +27,6 @@ func die():
 	drop_power_up()
 	queue_free()
 
-func _on_body_entered(body):
-	if body is Player:
-		body.die()
-		die()
-
 func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()
 	
@@ -51,3 +46,8 @@ func _on_laser_timer_timeout():
 func drop_power_up():
 	if randf() * 100 < chance_of_drop:
 		dropped_power_up.emit(heart_scene, global_position)
+
+func _on_area_entered(area):
+	if area is HurtBoxComponent:
+		area.hurt.emit(1)
+		die()

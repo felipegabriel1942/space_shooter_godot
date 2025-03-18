@@ -7,7 +7,7 @@ extends Node2D
 @onready var laser_container = $LaserContainer
 @onready var enemy_spawn_timer = $EnemySpawnTimer
 @onready var enemy_container = $EnemyContainer
-@onready var hud = $UILayer/HUD
+@onready var hud = $UILayer/HUD as Hud
 @onready var game_over_screen = $UILayer/GameOverScreen
 @onready var parallax_background = $ParallaxBackground
 @onready var laser_sound = $SFX/LaserSound
@@ -35,12 +35,14 @@ func _ready():
 		save_game()
 	
 	hud.score = 0
-	hud.max_health = player.stats.max_health
-	hud.health = player.stats.health
+	hud.set_max_health(player.stats.stats_resource.max_health)
+	hud.set_health(player.stats.stats_resource.health)
+	
 	player.global_position = player_spawn_pos.global_position
 	player.laser_shoot.connect(_on_laser_shot)
-	player.killed.connect(_on_player_killed)
-	player.hit.connect(_on_player_hit)
+	player.stats.stats_resource.no_health.connect(_on_player_killed)
+	player.hurt_box.hurt.connect(_on_player_hit)
+	player.hurt_box.healed.connect(_on_player_healed)
 
 func save_game():
 	var save_file = FileAccess.open("user://save.data", FileAccess.WRITE)
@@ -87,30 +89,29 @@ func _on_enemy_killed(points):
 func _on_enemy_hit():
 	hit_sound.play()
 	
-func _on_player_hit():
+func _on_player_hit(_amount: int):
 	hit_sound.play()
-	hud.health = player.stats.health
+	hud.set_health(player.stats.stats_resource.health)
 
 func _on_player_killed():
 	explode_sound.play()
 	game_over_screen.set_score(score)
 	game_over_screen.set_high_score(high_score)
-	hud.health = player.stats.health
+	hud.set_health(player.stats.stats_resource.health)
 	await get_tree().create_timer(1.5).timeout
 	game_over_screen.visible = true
 	save_game()
 
-func _on_player_healed():
-	hud.health = player.stats.health
+func _on_player_healed(amount: int):
+	hud.set_health(player.stats.stats_resource.health)
 
 func _on_heart_picked():
 	pick_up_power_up_sound.play()
 
-func _on_power_up_dropped(power_up_scene, location):	
+func _on_power_up_dropped(power_up_scene, location):
 	if !player.is_max_health():
 		var power_up = power_up_scene.instantiate()
 		power_up.global_position = location
 		power_up.picked.connect(_on_heart_picked)
 		power_up_container.add_child(power_up)
-	
-	
+

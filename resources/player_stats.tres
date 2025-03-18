@@ -1,9 +1,9 @@
-[gd_resource type="Resource" script_class="BaseStatsResource" load_steps=2 format=3 uid="uid://dwfnrnpld8jc4"]
+[gd_resource type="Resource" script_class="PlayerStatsResource" load_steps=2 format=3 uid="uid://dwfnrnpld8jc4"]
 
 [ext_resource type="Script" path="res://scripts/stats/player_stats_resource.gd" id="1_tpg4g"]
 
 [resource]
 script = ExtResource("1_tpg4g")
-health = 0
 fire_rate = 0.0
-max_health = 0
+health = 3
+speed = 300

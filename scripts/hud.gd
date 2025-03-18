@@ -1,14 +1,15 @@
 extends Control
+class_name Hud
+
+@onready var health_bar = $HealthBar
 
 @onready var score = $Score:
 	set(value):
 		score.text = str(value).lpad(7, "0")
-		
-@onready var max_health = $HealthBar:
-	set(value):
-		max_health.max_value = value
-		max_health.min_value = 0
 
-@onready var health = $HealthBar:
-	set(value):
-		health.value = value
+func set_max_health(health: int) -> void:
+	health_bar.max_value = health
+	health_bar.min_value = 0
+
+func set_health(health: int) -> void:
+	health_bar.value = health

@@ -10,7 +10,7 @@
 [ext_resource type="Script" path="res://components/death_component.gd" id="8_20556"]
 [ext_resource type="Script" path="res://components/hurt_box_component.gd" id="9_es0de"]
 [ext_resource type="Script" path="res://components/damage_component.gd" id="10_ufnwr"]
-[ext_resource type="Script" path="res://components/healing_component.gd" id="12_1712u"]
+[ext_resource type="Resource" uid="uid://dwfnrnpld8jc4" path="res://resources/player_stats.tres" id="11_4wqaj"]
 [ext_resource type="Script" path="res://components/stats_component.gd" id="12_se2a1"]
 
 [sub_resource type="Resource" id="Resource_v6gba"]
@@ -31,16 +31,17 @@ texture = ExtResource("1_d5kds")
 [node name="Muzzle" type="Marker2D" parent="."]
 position = Vector2(0, -47)
 
-[node name="MoveComponent" type="Node" parent="."]
+[node name="MoveComponent" type="Node" parent="." node_paths=PackedStringArray("actor")]
 script = ExtResource("4_ofd4y")
+actor = NodePath("..")
 
-[node name="MoveInputComponent" type="Node" parent="." node_paths=PackedStringArray("move_component", "stats_component")]
+[node name="MoveInputComponent" type="Node" parent="." node_paths=PackedStringArray("move_component")]
 script = ExtResource("5_8e76j")
 move_component = NodePath("../MoveComponent")
-stats_component = NodePath("../StatsComponent")
 
-[node name="PositionClampComponent" type="Node2D" parent="."]
+[node name="PositionClampComponent" type="Node2D" parent="." node_paths=PackedStringArray("actor")]
 script = ExtResource("6_nqk0k")
+actor = NodePath("..")
 
 [node name="DeathComponent" type="Node" parent="." node_paths=PackedStringArray("stats_component")]
 script = ExtResource("8_20556")
@@ -54,16 +55,11 @@ script = ExtResource("9_es0de")
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HurtBoxComponent"]
 polygon = PackedVector2Array(-25, 1, -9, -8, -6, -27, 6, -27, 9, -8, 25, 1, 29, -1, 31, -5, 35, -4, 33, 18, 30, 19, 28, 15, 10, 19, 5, 27, -5, 27, -10, 19, -29, 15, -30, 17, -33, 17, -35, -4, -30, -5)
 
-[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("hurt_box", "stats")]
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("hurt_box")]
 script = ExtResource("10_ufnwr")
 hurt_box = NodePath("../HurtBoxComponent")
-stats = NodePath("../StatsComponent")
+stats_resource = ExtResource("11_4wqaj")
 
 [node name="StatsComponent" type="Node" parent="."]
 script = ExtResource("12_se2a1")
 stats_resource = SubResource("Resource_v6gba")
-
-[node name="HealingComponent" type="Node" parent="." node_paths=PackedStringArray("hurt_box", "stats")]
-script = ExtResource("12_1712u")
-hurt_box = NodePath("../HurtBoxComponent")
-stats = NodePath("../StatsComponent")
