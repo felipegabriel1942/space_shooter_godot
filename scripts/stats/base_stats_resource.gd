@@ -7,7 +7,10 @@ signal no_health()
 @export var health: int:
 	set(value):
 		health = value
-		max_health = value
+		
+		if max_health == null:
+			max_health = value
+
 @export var speed := 300
 
-var max_health := 0
+var max_health

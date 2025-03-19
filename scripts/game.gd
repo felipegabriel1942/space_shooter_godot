@@ -105,13 +105,8 @@ func _on_player_killed():
 func _on_player_healed(amount: int):
 	hud.set_health(player.stats.stats_resource.health)
 
-func _on_heart_picked():
-	pick_up_power_up_sound.play()
-
 func _on_power_up_dropped(power_up_scene, location):
 	if !player.is_max_health():
 		var power_up = power_up_scene.instantiate()
 		power_up.global_position = location
-		power_up.picked.connect(_on_heart_picked)
 		power_up_container.add_child(power_up)
-

@@ -15,7 +15,7 @@
 
 [sub_resource type="Resource" id="Resource_v6gba"]
 script = ExtResource("2_xq3r6")
-fire_rate = 0.8
+fire_rate = 0.3
 health = 3
 speed = 300
 
