@@ -1,0 +1,9 @@
+[gd_resource type="Resource" script_class="EnemyStatsResource" load_steps=2 format=3 uid="uid://da5uos0qv5rqc"]
+
+[ext_resource type="Script" path="res://scripts/stats/enemy_stats_resource.gd" id="1_86wy4"]
+
+[resource]
+script = ExtResource("1_86wy4")
+fire_rate = 0.25
+health = 3
+speed = 300

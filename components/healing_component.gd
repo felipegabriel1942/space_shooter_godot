@@ -1,14 +1,14 @@
 extends Node
 class_name HealingComponent
 
-@export var hurt_box: HurtBoxComponent
-@export var stats: StatsComponent
+@export var hurt_box_component: HurtBoxComponent
+@export var stats_resource: BaseStatsResource
 
 func _ready():
-	hurt_box.healed.connect(_heal)
+	hurt_box_component.healed.connect(_heal)
 
 func _heal(amount: int) -> void:
-	stats.stats_resource.health += amount
+	stats_resource.health += amount
 	
-	if stats.stats_resource.health >= stats.stats_resource.max_health:
-		stats.stats_resource.health = stats.stats_resource.max_health
+	if stats_resource.health >= stats_resource.max_health:
+		stats_resource.health = stats_resource.max_health

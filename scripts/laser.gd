@@ -7,8 +7,9 @@ func _on_visible_on_screen_notifier_2d_screen_exited():
 	queue_free()
 
 func _on_area_entered(area):
-	if area is Enemy || area is EnemyBoss:
-		area.take_damage(damage)
+	if area is Enemy || area is EnemyBoss || area is HurtBoxComponent:
+		if area.has_method("take_damage"):
+			area.take_damage(damage)
 		
 		if death_particle != null:
 			var particle = death_particle.instantiate()

@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://bbtipirab218a"]
+[gd_scene load_steps=16 format=3 uid="uid://bbtipirab218a"]
 
 [ext_resource type="Script" path="res://scripts/game.gd" id="1_dr3bq"]
 [ext_resource type="PackedScene" uid="uid://bdxug6usf55au" path="res://scenes/player.tscn" id="2_qv4nh"]
@@ -13,7 +13,6 @@
 [ext_resource type="AudioStream" uid="uid://dw5q552imobfr" path="res://assets/audio/power_up_pickup.mp3" id="7_33x5e"]
 [ext_resource type="Texture2D" uid="uid://dxynlfe0tbhah" path="res://assets/textures/star.png" id="7_db661"]
 [ext_resource type="PackedScene" uid="uid://lehivtwshipr" path="res://scenes/enemies/enemy_boss.tscn" id="13_4uxb7"]
-[ext_resource type="PackedScene" uid="uid://cqsd8s21qmfff" path="res://scenes/power_ups/heart.tscn" id="14_2ljx2"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_g5t5n"]
 particle_flag_disable_z = true
@@ -104,8 +103,5 @@ environment = SubResource("Environment_ijdjb")
 
 [node name="EnemyBoss" parent="." instance=ExtResource("13_4uxb7")]
 position = Vector2(278, -190)
-
-[node name="Heart" parent="." instance=ExtResource("14_2ljx2")]
-position = Vector2(350, 259)
 
 [connection signal="timeout" from="EnemySpawnTimer" to="." method="_on_enemy_spawn_timer_timeout"]

@@ -1,11 +1,11 @@
 extends Node
 class_name DeathComponent
 
-@export var stats_component: StatsComponent
+@export var stats_resource: BaseStatsResource
 @export var death_particle: PackedScene
 
 func _ready() -> void:
-	stats_component.stats_resource.no_health.connect(die)
+	stats_resource.no_health.connect(die)
 
 func die() -> void:
 	if death_particle != null:

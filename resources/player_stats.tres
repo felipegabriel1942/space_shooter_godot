@@ -4,6 +4,6 @@
 
 [resource]
 script = ExtResource("1_tpg4g")
-fire_rate = 0.0
+fire_rate = 0.25
 health = 3
 speed = 300

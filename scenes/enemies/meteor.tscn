@@ -1,0 +1,28 @@
+[gd_scene load_steps=5 format=3 uid="uid://p0d6k2eel7nm"]
+
+[ext_resource type="Texture2D" uid="uid://cassw0goroh72" path="res://assets/textures/meteorGrey_med1.png" id="1_mdt2x"]
+[ext_resource type="Script" path="res://components/move_component.gd" id="2_hhyvk"]
+[ext_resource type="Script" path="res://components/hurt_box_component.gd" id="3_dyvxs"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_fe4d3"]
+radius = 19.0
+
+[node name="Meteor" type="Area2D"]
+collision_layer = 2
+collision_mask = 5
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("1_mdt2x")
+
+[node name="MoveComponent" type="Node" parent="."]
+script = ExtResource("2_hhyvk")
+velocity = Vector2(0, 150)
+
+[node name="HurtBoxComponent" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("3_dyvxs")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HurtBoxComponent"]
+position = Vector2(-1, 0)
+shape = SubResource("CircleShape2D_fe4d3")

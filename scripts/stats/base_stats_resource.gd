@@ -14,3 +14,6 @@ signal no_health()
 @export var speed := 300
 
 var max_health
+
+func is_full_health() -> bool:
+	return max_health == health

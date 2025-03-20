@@ -17,12 +17,12 @@ var laser_scene = preload("res://scenes/lasers/enemy_laser.tscn")
 var heart_scene = preload("res://scenes/power_ups/heart.tscn")
 
 func die():
-	if death_particle != null:
-		var particle = death_particle.instantiate()
-		particle.position = global_position
-		particle.rotation = global_rotation
-		particle.emitting = true
-		get_tree().current_scene.add_child(particle)
+	#if death_particle != null:
+		#var particle = death_particle.instantiate()
+		#particle.position = global_position
+		#particle.rotation = global_rotation
+		#particle.emitting = true
+		#get_tree().current_scene.add_child(particle)
 	
 	drop_power_up()
 	queue_free()
