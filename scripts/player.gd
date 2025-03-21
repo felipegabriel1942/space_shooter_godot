@@ -3,8 +3,9 @@ class_name Player extends CharacterBody2D
 signal laser_shoot(laser_scene, location)
 signal healed()
 
+@export var stats_component = BaseStatsComponent
+
 @onready var muzzle = $Muzzle
-@export var stats_resource = PlayerStatsResource
 @onready var hurt_box_component = $HurtBoxComponent as HurtBoxComponent
 
 var laser_scene = preload("res://scenes/lasers/laser.tscn")
@@ -15,7 +16,7 @@ func _physics_process(_delta):
 		if !shoot_cd:
 			shoot_cd = true
 			shoot()
-			await get_tree().create_timer(stats_resource.fire_rate).timeout
+			await get_tree().create_timer(stats_component.fire_rate).timeout
 			shoot_cd = false
 
 func shoot():

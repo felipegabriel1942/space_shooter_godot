@@ -4,6 +4,8 @@
 
 [resource]
 script = ExtResource("1_86wy4")
+points = 100
+chance_of_drop = 15
 fire_rate = 0.25
-health = 3
+health = 2
 speed = 300

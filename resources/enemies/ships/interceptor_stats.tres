@@ -4,6 +4,8 @@
 
 [resource]
 script = ExtResource("1_g4pbk")
+points = 50
+chance_of_drop = 10
 fire_rate = 0.45
 health = 1
 speed = 500

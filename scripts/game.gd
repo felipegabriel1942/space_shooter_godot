@@ -35,12 +35,12 @@ func _ready():
 		save_game()
 	
 	hud.score = 0
-	hud.set_max_health(player.stats_resource.max_health)
-	hud.set_health(player.stats_resource.health)
+	hud.set_max_health(player.stats_component.max_health)
+	hud.set_health(player.stats_component.health)
 	
 	player.global_position = player_spawn_pos.global_position
 	player.laser_shoot.connect(_on_laser_shot)
-	player.stats_resource.no_health.connect(_on_player_killed)
+	player.stats_component.died.connect(_on_player_killed)
 	player.hurt_box_component.hurt.connect(_on_player_hit)
 	player.hurt_box_component.healed.connect(_on_player_healed)
 
@@ -73,9 +73,8 @@ func _on_laser_shot(laser_scene, location):
 func _on_enemy_spawn_timer_timeout():
 	var enemy = enemy_scenes.pick_random().instantiate()
 	enemy.global_position = Vector2(randf_range(50, 500), 50)
-	enemy.killed.connect(_on_enemy_killed)
+	enemy.stats_component.destroyed.connect(_on_enemy_killed)
 	enemy.laser_shoot.connect(_on_laser_shot)
-	enemy.hit.connect(_on_enemy_hit)
 	enemy.dropped_power_up.connect(_on_power_up_dropped)
 	enemy_container.add_child(enemy)
 
@@ -91,22 +90,22 @@ func _on_enemy_hit():
 	
 func _on_player_hit(_amount: int):
 	hit_sound.play()
-	hud.set_health(player.stats_resource.health)
+	hud.set_health(player.stats_component.health)
 
 func _on_player_killed():
 	explode_sound.play()
 	game_over_screen.set_score(score)
 	game_over_screen.set_high_score(high_score)
-	hud.set_health(player.stats_resource.health)
+	hud.set_health(player.stats_component.health)
 	await get_tree().create_timer(1.5).timeout
 	game_over_screen.visible = true
 	save_game()
 
 func _on_player_healed(amount: int):
-	hud.set_health(player.stats_resource.health)
+	hud.set_health(player.stats_component.health)
 
 func _on_power_up_dropped(power_up_scene, location):
-	if !player.stats_resource.is_full_health():
+	if !player.stats_component.is_full_health():
 		var power_up = power_up_scene.instantiate()
 		power_up.global_position = location
 		power_up_container.add_child(power_up)

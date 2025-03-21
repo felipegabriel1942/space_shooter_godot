@@ -10,6 +10,9 @@ func _on_area_entered(area):
 	if area is Enemy || area is EnemyBoss || area is HurtBoxComponent:
 		if area.has_method("take_damage"):
 			area.take_damage(damage)
+			
+		if area is HurtBoxComponent:
+			area.hurt.emit(damage)
 		
 		if death_particle != null:
 			var particle = death_particle.instantiate()

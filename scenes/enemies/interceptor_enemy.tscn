@@ -1,30 +1,38 @@
-[gd_scene load_steps=6 format=3 uid="uid://ysqb1cnnnnqd"]
+[gd_scene load_steps=10 format=3 uid="uid://ysqb1cnnnnqd"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_jtn1b"]
 [ext_resource type="Texture2D" uid="uid://bwm656t2p1m5f" path="res://assets/textures/enemyRed3.png" id="2_1yah5"]
 [ext_resource type="PackedScene" uid="uid://cnhv2qwap7hrg" path="res://scenes/particles/explosion_particles.tscn" id="2_oenhw"]
+[ext_resource type="Script" path="res://components/hurt_box_component.gd" id="4_8khno"]
 [ext_resource type="Script" path="res://components/flash_component.gd" id="4_xnt3j"]
 [ext_resource type="Script" path="res://components/move_component.gd" id="5_bw8am"]
+[ext_resource type="Script" path="res://components/enemy_status_component.gd" id="6_cfhw2"]
+[ext_resource type="Script" path="res://components/death_component.gd" id="7_4d7d7"]
+[ext_resource type="Script" path="res://components/damage_component.gd" id="8_v7dya"]
 
-[node name="InterceptorEnemy" type="Area2D"]
+[node name="InterceptorEnemy" type="Area2D" node_paths=PackedStringArray("stats_component")]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_jtn1b")
-health = 2
-points = 50
 death_particle = ExtResource("2_oenhw")
+stats_component = NodePath("EnemyStatsComponent")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.7, 0.7)
 texture = ExtResource("2_1yah5")
 
-[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="."]
-polygon = PackedVector2Array(-36, -3, -18, -25, -12, -25, -6, -29, 6, -29, 12, -25, 18, -25, 36, -2, 27, 30, 19, 28, 21, 19, 9, 16, 6, 24, -6, 24, -10, 16, -22, 20, -20, 27, -27, 30)
-
 [node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
 
 [node name="Muzzle" type="Marker2D" parent="."]
 position = Vector2(1, 43)
+
+[node name="HurtBoxComponent" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 5
+script = ExtResource("4_8khno")
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="HurtBoxComponent"]
+polygon = PackedVector2Array(-36, -3, -18, -25, -12, -25, -6, -29, 6, -29, 12, -25, 18, -25, 36, -2, 27, 30, 19, 28, 21, 19, 9, 16, 6, 24, -6, 24, -10, 16, -22, 20, -20, 27, -27, 30)
 
 [node name="LaserTimer" type="Timer" parent="."]
 wait_time = 2.0
@@ -36,8 +44,28 @@ sprite = NodePath("../Sprite2D")
 
 [node name="MoveComponent" type="Node" parent="."]
 script = ExtResource("5_bw8am")
-velocity = Vector2(0, 150)
+velocity = Vector2(0, 250)
+
+[node name="DeathComponent" type="Node" parent="." node_paths=PackedStringArray("stats_component", "hurt_box_component")]
+script = ExtResource("7_4d7d7")
+stats_component = NodePath("../EnemyStatsComponent")
+death_particle = ExtResource("2_oenhw")
+hurt_box_component = NodePath("../HurtBoxComponent")
+death_on_collision = true
+
+[node name="DamageComponent" type="Node" parent="." node_paths=PackedStringArray("hurt_box_component", "stats_component")]
+script = ExtResource("8_v7dya")
+hurt_box_component = NodePath("../HurtBoxComponent")
+stats_component = NodePath("../EnemyStatsComponent")
+
+[node name="EnemyStatsComponent" type="Node" parent="."]
+script = ExtResource("6_cfhw2")
+points = 50
+chance_of_drop = 0.1
+health = 3
+speed = 600
 
 [connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]
+[connection signal="area_entered" from="HurtBoxComponent" to="." method="_on_hurt_box_component_area_entered"]
 [connection signal="timeout" from="LaserTimer" to="." method="_on_laser_timer_timeout"]
